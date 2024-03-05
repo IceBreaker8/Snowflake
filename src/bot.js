@@ -41,10 +41,8 @@ async function extractAndReplacePrices(message) {
       matchPromises.push(
         (async () => {
           try {
-            const fetchedData = await fetchData(currencyCode);
-
-            if (fetchedData !== "") {
-              const multiplier = fetchedData.eur;
+            const multiplier = await fetchData(currencyCode);
+            if (multiplier !== "") {
               resultBeforeRounding = price * multiplier;
 
               console.log(resultBeforeRounding);
@@ -89,10 +87,12 @@ async function extractAndReplacePrices(message) {
 // fetching currency from CDN link
 async function fetchData(currencyCode) {
   return fetch(
-    `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currencyCode
+    `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024.3.2/v1/currencies/${currencyCode
       ?.toString()
-      ?.toLowerCase()}/eur.json`
-  ).then((res) => res.json());
+      ?.toLowerCase()}.json`
+  )
+    .then((res) => res.json())
+    .then((res) => res[[currencyCode]]["eur"]);
 }
 
 // start discord bot connection
