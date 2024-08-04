@@ -12,32 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Request manual approval
-        id: approval
-        uses: hmarr/auto-approve-action@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Wait for manual approval
-        if: ${{ github.event_name == 'workflow_run' }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const response = await github.rest.repos.getCommit({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: context.ref
-            });
-            if (response.data.commit.message.includes('[APPROVED]')) {
-              console.log('Manual approval received');
-            } else {
-              throw new Error('Manual approval not received');
-            }
-
       - name: Deploy to server
-        if: ${{ steps.approval.outputs.approved == 'true' }}
         run: |
-          ssh -o StrictHostKeyChecking=no user@your-server-address << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_ADDRESS }} << 'EOF'
             cd /path/to/your/project
             git pull origin main
             # Optionally, restart your service or run additional commands here
