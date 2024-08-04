@@ -20,4 +20,4 @@ jobs:
             cd Snowflake/
             git pull
             cd ..
-            docker compose up -d --no-deps --build Snowflake
+            docker compose up -d --no-deps --build snowflake
