@@ -9,15 +9,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Deploy to server
-        run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@94.23.222.70 << 'EOF'
-            cd /path/to/your/project
-            git pull origin main
-            # Optionally, restart your service or run additional commands here
-          EOF
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Deploy to server using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            cd cd summer-project-docker-compose/
+            ls -a
