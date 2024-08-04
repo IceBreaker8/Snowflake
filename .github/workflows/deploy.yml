@@ -17,4 +17,7 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
             cd summer-project-docker-compose/
-            ls -a
+            cd Snowflake/
+            git pull
+            cd ..
+            docker compose up -d --no-deps --build Snowflake
