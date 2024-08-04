@@ -16,5 +16,5 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
-            cd cd summer-project-docker-compose/
+            cd summer-project-docker-compose/
             ls -a
