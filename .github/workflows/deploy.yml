@@ -14,7 +14,7 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ vars.VPS_ADDRESS }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@94.23.222.70 << 'EOF'
             cd /path/to/your/project
             git pull origin main
             # Optionally, restart your service or run additional commands here
