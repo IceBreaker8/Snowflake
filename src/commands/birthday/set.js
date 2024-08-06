@@ -4,8 +4,8 @@ const backUrl = process.env.API_URL;
 
 const axiosInstance = axios.create({
   headers: {
-    Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`, // Replace YOUR_API_KEY_HERE with your actual API key
-    "Content-Type": "application/json", // Adjust as needed
+    Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+    "Content-Type": "application/json",
   },
 });
 
@@ -24,16 +24,15 @@ module.exports = async (client, interaction, args) => {
     });
   }
 
-  //
+  // check if discord member has the Snowflake Birthday role
   const userId = interaction.user.id;
   const member = await interaction.guild.members.fetch(interaction.user.id);
-  // check if discord member has the Snowflake Birthday role
   if (
     !member.roles.cache.map((role) => role.name).includes("Snowflake Birthday")
   ) {
     return await interaction.reply({
       content:
-        "You are not authorized to use the Birthday commands, you need the Snowflake Birthday command, ask admins to assign you this role",
+        "You are not authorized to use the Birthday commands, you need the Snowflake Birthday role, ask admins to assign you this role",
       ephemeral: true,
     });
   }

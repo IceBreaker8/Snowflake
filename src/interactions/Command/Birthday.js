@@ -10,7 +10,7 @@ module.exports = {
     .addSubcommand((subcommand) =>
       subcommand
         .setName("set")
-        .setDescription("Add your own birthday to snowflake")
+        .setDescription("Add your own birthday to Snowflake")
         .addStringOption((option) =>
           option
             .setName("day")
@@ -26,6 +26,14 @@ module.exports = {
         .addStringOption((option) =>
           option.setName("year").setDescription("The year of the birth date")
         )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("remove")
+        .setDescription("Remove your birthday from Snowflake")
+    )
+    .addSubcommand((subcommand) =>
+      subcommand.setName("view").setDescription("View your set birthday")
     ),
   /**
    * @param {Client} client
