@@ -31,6 +31,9 @@ module.exports = {
       subcommand
         .setName("remove")
         .setDescription("Remove your birthday from Snowflake")
+    )
+    .addSubcommand((subcommand) =>
+      subcommand.setName("view").setDescription("View your set birthday")
     ),
   /**
    * @param {Client} client
