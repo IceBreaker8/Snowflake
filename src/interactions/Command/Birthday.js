@@ -6,11 +6,26 @@ const Discord = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("birthday")
-    .setDescription("This is a description")
+    .setDescription("A birthday discord command")
     .addSubcommand((subcommand) =>
       subcommand
-        .setName("add")
-        .setDescription("Get information about the giveaway category commands")
+        .setName("set")
+        .setDescription("Add your own birthday to snowflake")
+        .addStringOption((option) =>
+          option
+            .setName("day")
+            .setDescription("The day of the birth date")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName("month")
+            .setDescription("The month of the birth date")
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option.setName("year").setDescription("The year of the birth date")
+        )
     ),
   /**
    * @param {Client} client
