@@ -77,7 +77,7 @@ module.exports = async (client, interaction, args) => {
       (birthday) => {
         return interaction.reply({
           content:
-            "Your birthday has been added, check it using /birthday check",
+            "Your birthday has been added, check it using /birthday view",
           ephemeral: true,
         });
       },
