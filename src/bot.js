@@ -26,23 +26,11 @@ client.on("ready", () => {
 //require("./handlers/functions/function.js")(client);
 
 /**
- * register events
+ * Load handlers (functions, commands, events, etc...)
  */
 
-// Load events handlers
-/*
-const eventFiles = fs
-  .readdirSync(path.join(__dirname, "events/currency"))
-  .filter((file) => file.endsWith(".js"));
-for (const file of eventFiles) {
-  const event = require(path.join(__dirname, "events/currency", file));
-  const eventName = file.split(".")[0];
-  client.on(eventName, event.bind(null, client));
-}*/
-// load commands
 client.commands = new Collection();
 
-// Load handlers (functions, commands, events, etc...)
 fs.readdirSync("./src/handlers").forEach((dir) => {
   fs.readdirSync(`./src/handlers/${dir}`).forEach((handler) => {
     require(`./handlers/${dir}/${handler}`)(client);
