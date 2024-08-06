@@ -16,15 +16,20 @@ module.exports = {
             .setName("day")
             .setDescription("The day of the birth date")
             .setRequired(true)
+            .setMaxLength(2)
         )
         .addStringOption((option) =>
           option
             .setName("month")
             .setDescription("The month of the birth date")
             .setRequired(true)
+            .setMaxLength(2)
         )
         .addStringOption((option) =>
-          option.setName("year").setDescription("The year of the birth date")
+          option
+            .setName("year")
+            .setDescription("The year of the birth date")
+            .setMaxLength(4)
         )
     )
     .addSubcommand((subcommand) =>
