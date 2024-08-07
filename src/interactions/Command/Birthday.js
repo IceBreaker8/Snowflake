@@ -39,6 +39,26 @@ module.exports = {
     )
     .addSubcommand((subcommand) =>
       subcommand.setName("view").setDescription("View your set birthday")
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("set-visibility")
+        .setDescription("Set your birthday visibility to public or private")
+        .addStringOption((option) =>
+          option
+            .setName("visibility")
+            .setDescription("Choose public or private")
+            .setRequired(true)
+            .addChoices(
+              { name: "public", value: "public" },
+              { name: "private", value: "private" }
+            )
+        )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("list")
+        .setDescription("View the list of all publicly set birthdays")
     ),
   /**
    * @param {Client} client

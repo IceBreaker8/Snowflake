@@ -51,4 +51,8 @@ module.exports = async (client) => {
       dayNum <= getDaysInMonth(monthNum, yearNum)
     );
   };
+
+  client.addZeroAndTrim = (string) => {
+    return ("000000" + string).slice(-2);
+  };
 };

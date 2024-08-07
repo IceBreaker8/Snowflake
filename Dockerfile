@@ -4,7 +4,7 @@ FROM node:18-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the package.json and package-lock.json (if available)
+# Copy the package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
@@ -14,5 +14,5 @@ RUN npm install
 COPY . .
 
 
-# Command to run your bot
+# Command to run the bot
 CMD ["node","src/bot.js"]
