@@ -55,10 +55,21 @@ module.exports = {
             )
         )
     )
-    .addSubcommand((subcommand) =>
+    /*.addSubcommand((subcommand) =>
       subcommand
         .setName("list")
         .setDescription("View the list of all publicly set birthdays")
+    ),*/
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("lookup")
+        .setDescription("Check a user's birthday if its set to public")
+        .addUserOption((option) =>
+          option
+            .setName("user")
+            .setDescription("The year of the birth date")
+            .setRequired(true)
+        )
     ),
   /**
    * @param {Client} client

@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
       ephemeral: true,
     });
   }
-  if (year < 1900 || year > new Date().getFullYear()) {
+  if ((year && year < 1900) || year > new Date().getFullYear()) {
     // restrict non logical ages
     return await interaction.reply({
       content: "The year is not valid",
@@ -85,7 +85,6 @@ module.exports = async (client, interaction, args) => {
     .then(
       (birthday) => {
         return interaction.reply({
-
           content: "Your birthday has been added, view it using /birthday view",
           ephemeral: true,
         });
