@@ -10,23 +10,38 @@ const axiosInstance = axios.create({
 });
 
 module.exports = async (client, interaction, args) => {
-  // check if discord member has the Snowflake Birthday role
+  // grab interaction variables
   const userId = interaction.user.id;
+  const visibility = interaction.options.getString("visibility");
 
   return await axiosInstance
     .get(backUrl + `/birthdays?filters[user_id][$eq]=${userId}`)
     .then((obj) => obj.data)
     .then((birthdays) => {
       const birthday = birthdays?.data?.[0];
-      // show birthday if exists
+      // check if birthday exists
       if (birthday) {
-        // show birthday
-        return interaction.reply({
-          content: `Your birthday is set on ${birthday.birth_date}`,
-          ephemeral: true,
-        });
+        return axiosInstance
+          .put(backUrl + `/birthdays/${birthday.documentId}`, {
+            data: {
+              visibility,
+            },
+          })
+          .then(
+            (birthday) => {
+              return interaction.reply({
+                content: `You set your birthday visibility to ${visibility}`,
+                ephemeral: true,
+              });
+            },
+            (err) => {
+              return interaction.reply({
+                content: err?.response?.data?.error?.message,
+                ephemeral: true,
+              });
+            }
+          );
       } else {
-        // birthday doesn't exist
         return interaction.reply({
           content: "You didn't set a birthday in Snowflake yet",
           ephemeral: true,

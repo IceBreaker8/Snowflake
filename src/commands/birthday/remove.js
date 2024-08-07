@@ -10,19 +10,9 @@ const axiosInstance = axios.create({
 });
 
 module.exports = async (client, interaction, args) => {
-  // check if discord member has the Snowflake Birthday role
   const userId = interaction.user.id;
-  const member = await interaction.guild.members.fetch(interaction.user.id);
-  if (
-    !member.roles.cache.map((role) => role.name).includes("Snowflake Birthday")
-  ) {
-    return await interaction.reply({
-      content:
-        "You are not authorized to use the Birthday commands, you need the Snowflake Birthday role, ask admins to assign you this role",
-      ephemeral: true,
-    });
-  }
-  const findBirthday = await axiosInstance
+
+  return await axiosInstance
     .get(backUrl + `/birthdays?filters[user_id][$eq]=${userId}`)
     .then((obj) => obj.data)
     .then(

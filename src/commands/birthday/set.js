@@ -26,7 +26,7 @@ module.exports = async (client, interaction, args) => {
 
   // check if discord member has the Snowflake Birthday role
   const userId = interaction.user.id;
-  const member = await interaction.guild.members.fetch(interaction.user.id);
+  /*const member = await interaction.guild.members.fetch(interaction.user.id);
   if (
     !member.roles.cache.map((role) => role.name).includes("Snowflake Birthday")
   ) {
@@ -35,7 +35,7 @@ module.exports = async (client, interaction, args) => {
         "You are not authorized to use the Birthday commands, you need the Snowflake Birthday role, ask admins to assign you this role",
       ephemeral: true,
     });
-  }
+  }*/
 
   // check if user has already added their birthday
   const doesBirthdayExist = await axiosInstance
@@ -76,8 +76,7 @@ module.exports = async (client, interaction, args) => {
     .then(
       (birthday) => {
         return interaction.reply({
-          content:
-            "Your birthday has been added, check it using /birthday check",
+          content: "Your birthday has been added, view it using /birthday view",
           ephemeral: true,
         });
       },
