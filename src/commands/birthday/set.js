@@ -23,6 +23,13 @@ module.exports = async (client, interaction, args) => {
       ephemeral: true,
     });
   }
+  if (year < 1900 || year > new Date().getFullYear()) {
+    // restrict non logical ages
+    return await interaction.reply({
+      content: "The year is not valid",
+      ephemeral: true,
+    });
+  }
 
   // check if discord member has the Snowflake Birthday role
   const userId = interaction.user.id;
@@ -69,7 +76,9 @@ module.exports = async (client, interaction, args) => {
     .post(backUrl + `/birthdays?filters[user_id][$eq]=${userId}`, {
       data: {
         user_id: userId,
-        birth_date: `${day}-${month}${year ? `-${year}` : ""}`,
+        birth_date: `${client.addZeroAndTrim(day)}-${client.addZeroAndTrim(
+          month
+        )}${year ? `-${year}` : ""}`,
       },
     })
     .then((object) => object.data)
