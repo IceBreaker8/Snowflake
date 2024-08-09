@@ -33,6 +33,7 @@ module.exports = async (client, interaction, args) => {
 
   // check if discord member has the Snowflake Birthday role
   const userId = interaction.user.id;
+  const user = await client.users.fetch(userId);
   /*const member = await interaction.guild.members.fetch(interaction.user.id);
   if (
     !member.roles.cache.map((role) => role.name).includes("Snowflake Birthday")
@@ -76,6 +77,7 @@ module.exports = async (client, interaction, args) => {
     .post(backUrl + `/birthdays?filters[user_id][$eq]=${userId}`, {
       data: {
         user_id: userId,
+        user_global_name: user.globalName,
         birth_date: `${client.addZeroAndTrim(day)}-${client.addZeroAndTrim(
           month
         )}${year ? `-${year}` : ""}`,
